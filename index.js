@@ -21,6 +21,7 @@ const computeHash = (password, salt)=>{
 	return hash
 }
 
+//makes an empty dictionary for each spot in the array
 const available = Array(24)
 for (let i = 0; i < available.length; i++) { 
     available[i] = {}
@@ -148,6 +149,7 @@ const lots = [
     }
 ]
 
+//makes spots for each parking lot and sets them to true
 lots.map(lot => {
     for (let i = 0; i < lot.capacity; i++) { 
         lot.spots[i] = true
@@ -261,6 +263,7 @@ app.post('/lots/reserve', (req, res) => {
 
     let lot = lots.filter(s => s.name === lotName)[0]
 
+    //if the user is logged in and chooses a valid spot reserves spot accordingly
     if (username in reserved) {
         const {lotName, spot, startTime, endTime} = reserved[username]
 
@@ -280,6 +283,7 @@ app.post('/lots/reserve', (req, res) => {
         }
     }
 
+    //adds the spot to reserved according to the username and stores other data so user can only have one spot
     reserved[username] = {
         lotName,
         spot,
@@ -291,6 +295,7 @@ app.post('/lots/reserve', (req, res) => {
         delete available[i][lotName][spot]
     }
 
+    //moves the overall counter down
     lot.open -= 1
 
     console.log(reserved)
@@ -305,6 +310,7 @@ app.get('/lots/available', (req, res) => {
     const startTime = parseInt(req.query.startTime)
     const endTime = parseInt(req.query.endTime)
 
+    //algorithm to sort through and only return the spots in each lot that are open for each time from start to end 
     const result = Object.keys(available[startTime]).flatMap(name => {
         const lot = available[startTime][name]
         return {[name]: Object.entries(lot).filter(spot => {
@@ -323,6 +329,7 @@ app.get('/lots/available', (req, res) => {
         reformatted[k] = obj[k].map(spot => ({"id": parseInt(spot[0])}))
     })
 
+    //combines all lots
     const combined = [...lots]
     combined.map(lot => lot.spots = reformatted[lot.name])
 
@@ -336,6 +343,9 @@ app.get('/lots/all', (req, res) => {
     return res.json(lots)
 })
 
+/**
+ * should never be reached unless incorrect request is sent
+ */
 app.get('*', (req, res) => {
     return res.sendStatus(200)
 });
