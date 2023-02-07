@@ -12,6 +12,7 @@ app.options('*', cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+//function to compute a hash for a password with an added salt
 const computeHash = (password, salt)=>{
     let hash = crypto.createHash('sha256')
 	.update(password + salt)
@@ -27,6 +28,8 @@ for (let i = 0; i < available.length; i++) {
 
 const reserved = {}
 
+
+//Data for parking lots and spaces
 const numSpots = 5
 const lots = [
     {   name: "C-01",
@@ -151,6 +154,7 @@ lots.map(lot => {
     }
 })
 
+//default user for testing purposes
 const users = {
     "jtmarks": {
         salt: "absdfabsdffffr444",
@@ -167,7 +171,10 @@ lots.forEach(lot => {
     }
 })
 
-
+/**
+ * adds a new user based on the username and password passed in, if the user doesnt already exist salt is added to password 
+ * and then password is hashed for increased security
+ */
 app.post('/newUser', (req, res) => {
     const {username, password} = req.body;
     const salt = new Date().toString()
@@ -185,6 +192,10 @@ app.post('/newUser', (req, res) => {
     return res.sendStatus(200)
 })
 
+
+/**
+ * checks if the username and password that are passed in align with a user stored in the databse
+ */
 app.post('/auth', (req, res) => {
     const {username, password} = req.body;
 
@@ -212,6 +223,9 @@ app.post('/auth', (req, res) => {
     return res.sendStatus(400)
 })
 
+/**
+ * takes the user out of the list of currently logged in users
+ */
 app.post('/logout', (req, res) => {
     const username = req.body.username
 
@@ -221,10 +235,19 @@ app.post('/logout', (req, res) => {
     return res.sendStatus(200)
 })
 
+
+/**
+ * returns all lots stored in the database
+ */
 app.get('/lots/allLotName', (req, res) => {
     return res.json(Object.keys(lots))
 })
 
+
+/**
+ * uses the passed in info to verify that the user is currently logged in if the user is valid the lot and spot 
+ * passed in will be used to tell the database that the spot is reserved for the time period passed in
+ */
 app.post('/lots/reserve', (req, res) => {
     const lotName = req.body.name
     const spot = req.body.spot
@@ -275,6 +298,9 @@ app.post('/lots/reserve', (req, res) => {
     return res.sendStatus(200)
 })
 
+/**
+ * sorts through all available lots, and returns only the lots and spots in them that are avlaible during the time frame specified
+ */
 app.get('/lots/available', (req, res) => {
     const startTime = parseInt(req.query.startTime)
     const endTime = parseInt(req.query.endTime)
@@ -303,6 +329,9 @@ app.get('/lots/available', (req, res) => {
     return res.json(combined)
 })
 
+/**
+ * returns all information of all lots and the information stored inside of them
+ */
 app.get('/lots/all', (req, res) => {
     return res.json(lots)
 })
