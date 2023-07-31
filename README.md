@@ -1,34 +1,47 @@
 # TigerPark
 
-### TigerPark is a backend API made to supply data relating to Clemson University Parking lots
+## Description
 
-This program deals with the parking data of multiple different parking lots and the specific spaces inside them. Depeding on the request made, the program
-will return data in a variety of different ways depending on what the data is.
+A hackathon project built to be a mockup parking reservation app for Clemson University students, made with TypeScript, JavaScript, Node.js, and React. 
 
 
-## Endpoints 
+## Project Screen Shot(s)
 
-### `POST /newuser`
-adds a new user based on the username and password passed in, if the user doesnt already exist
-salt is added to password and then password is hashed for increased security
+<img src="./readmeImages/homepage2023.jpeg" alt="Alt Text" width="400">
 
-### `POST /auth`
-checks if the username and password that are passed in align with a user stored in the databse
+<img src="./readmeImages/viewpage2023.jpeg" alt="Alt Text" width="400">
 
-### `POST /logout`
-takes the user out of the list of currently logged in users 
 
-### `POST /lots/reserve`
-uses the passed in info to verify that the user is currently logged in
-if the user is valid the lot and spot passed in will be used to tell the database that the spot is reserved for the time period passed in
 
-### `GET /lots/allLotName`
-returns all lots stored in the database
+## Installation and Setup Instructions
 
-### `GET /lots/available`
-sorts through all available lots, and returns only the lots and spots in them that are avlaible during the time frame specified
+Clone down this repository. You will need `node` and `npm` installed globally on your machine.  
 
-### `GET /lots/all`
-returns all information of all lots and the information stored inside of them
+Installation:
+
+`npm install`  
+
+To Run Test Suite:  
+
+`npm test`  
+
+To Start Server:
+
+`npm start`  
+
+To Visit App:
+
+`http://localhost:3000`  
+
+## Reflection
+
+
+This project was made at the CU Hackit 2023 hackathon. We had 24 hours to build with no specifications on what to build, other than explore what interests you.
+
+We set out to build an app that solved a problem that was widespread on campus. The parking for commuting students is a pain for many people. We decided to try and build a mock up of a possible solution in which students could reserve a specific spot ahead of time, rather than driving around parking lots aimlessly until they find a spot.
+
+One of the biggest problems we ran into was communication between the front and back end teams. While we defined endpoints early on that were going to be used to transfer data between the database and the front end, some miscommunication between teams led to some big disconnects that were realized only when we went to merge the front and back end. This allowed me to realize the necessity of sticking to the plan in the beginning, and to ensure throughout that everyone is on the same page.
+
+We chose this tech stack because we wanted to use a web app to make it most accessible. JavaScript and Typescript were helpful in order to fit in well with web deveoplemnt and using Node.js to host. We hosted our servers on AWS EC2 servers because they were made available to us through the hackathon for free, and the use of Reacte was preference for ease of use.
 
 
