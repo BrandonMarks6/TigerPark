@@ -1,0 +1,77 @@
+.home {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.home .hero-container {
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3em;
+}
+
+.home .time-fields {
+    display: flex;
+    flex-direction  : row;
+    justify-content: space-between;
+    gap: 1.5em;
+}
+
+.home .time-fields > div {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: .5em;
+    padding: .5em 1em;
+    border-radius: 1em;
+}
+
+
+
+.start-field {
+    border: var(--orange) solid .125em;
+}
+
+.end-field {
+    border: var(--purple) solid .125em;
+}
+
+.home .time-fields input {
+    border: 0;
+}
+
+.home .time-fields input:focus {
+    outline: none;
+}
+
+.home > img{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}
+.hero-container .buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 2em;
+}
+
+.hero-container .button{
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    gap: 1em;
+    align-items: center;
+    border-radius: .5em;
+    padding: 1em 1.5em;
+    background: var(--indigo);
+    color: white;
+    border: none;
+    text-decoration: none;
+}
+

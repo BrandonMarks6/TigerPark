@@ -1,0 +1,16 @@
+.leaflet-container {
+    width: 50%;
+    height: 100vh;
+}
+
+.parking-icon:after {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 0;
+    height: 0;
+    content: "🅟";
+    font-size: 30px;
+    color: #F56600;
+}

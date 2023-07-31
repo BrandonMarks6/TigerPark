@@ -1,0 +1,17 @@
+.parking-spots {
+    overflow-x: auto;
+}
+
+.parking-spot:hover {
+    background-color: #79d488;
+}
+
+.parking-spot {
+    background-color: #87e897;
+    aspect-ratio: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: rgb(0, 0, 0, .25) solid .05em;
+    font-size: .9rem;
+}

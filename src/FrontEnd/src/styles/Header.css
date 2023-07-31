@@ -1,0 +1,23 @@
+.header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: .5em 3em;
+}
+
+.left-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 2em;
+}
+
+.right-header {
+    display: flex;
+    align-items: center;
+}
+
+.header img {
+    width: 3em;
+    aspect-ratio: 1;
+}
